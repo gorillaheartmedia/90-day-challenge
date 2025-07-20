@@ -2,14 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Custom 90-Day 5-Goal Tracker</title>
+  <title>Goal Tracker</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- CSS will be added in the next step -->
-  <link rel="stylesheet" href="styles.css">
 </head>
-<body>
 <style>
-body {
+  body {
   font-family: 'Segoe UI', Arial, sans-serif;
   background: linear-gradient(115deg, #e7f7fd 0%, #d4e6fc 100%);
   min-height: 100vh;
@@ -18,23 +15,31 @@ body {
   overflow-x: hidden;
 }
 .container {
-  width: 100%;
-  max-width: 970px;
-  margin: 24px auto 28px auto;
+  max-width: 980px;
+  margin: 30px auto 30px auto;
   background: rgba(255,255,255,0.91);
-  border-radius: 26px;
+  border-radius: 30px;
   box-shadow: 0 10px 36px 0 rgba(54,86,120,0.10), 0 2px 4px 0 rgba(74,124,170,0.06);
-  padding: 15px 10px 26px 10px;
+  padding: 28px 20px 28px 20px;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
-
+h1 {
+  text-align: center;
+  font-size: 2.25em;
+  font-weight: 800;
+  margin-bottom: 4px;
+  background: linear-gradient(90deg,#319cfa 10%,#6ffab6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  filter: drop-shadow(0 2px 4px #319cfa16);
+  width: 100%;
+}
 .settings-bar {
-  align-self: flex-end;
+  text-align: right;
   margin-bottom: 12px;
-  padding-right: 10px;
+  padding-right: 16px;
 }
 .settings-btn {
   background: linear-gradient(90deg,#d7eaf6 60%,#c6f7e6 100%);
@@ -54,40 +59,21 @@ body {
   color: #17825b;
   border-color: #37b599;
 }
-
-h1 {
-  text-align: center;
-  font-size: 2.1em;
-  font-weight: 800;
-  margin-bottom: 4px;
-  background: linear-gradient(90deg,#319cfa 10%,#6ffab6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-fill-color: transparent;
-  filter: drop-shadow(0 2px 4px #319cfa16);
-  width: 100%;
-}
-
 .progress-section {
   text-align: center;
-  margin-bottom: 18px;
+  margin-bottom: 24px;
   width: 100%;
-  max-width: 440px;
-  margin-left: auto;
-  margin-right: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
 .progress-bar-bg {
-  width: 100%;
-  background: rgba(220,234,250,0.69);
+  width: 72%;
+  background: rgba(220,234,250,0.68);
   border-radius: 19px;
   height: 28px;
   margin: 0 auto 12px auto;
-  box-shadow: 0 1.5px 6px 0 rgba(49,180,250,0.11);
+  box-shadow: 0 1.5px 6px 0 rgba(49,180,250,0.12);
   overflow: hidden;
   border: 1.5px solid #b9e3fa7a;
   position: relative;
@@ -105,110 +91,198 @@ h1 {
   text-align: center !important;
   width: 100%;
   display: block;
-  margin: 0 auto 7px auto;
+  margin: 0 auto 6px auto;
+}
+.percentage {
+  font-size: 1.21em;
+  font-weight: 700;
+  color: #145f8d;
+  text-shadow: 0 1px 2px #b0e7f6cc;
+  margin-bottom: 8px;
+}
+/* --- Intervention Wizard Modal --- */
+#intervene-modal-card {
+  max-width: 420px;
+  width: 98vw;
 }
 
+#intervene-content {
+  text-align: left;
+}
+
+.intervene-step-label {
+  font-weight: 700;
+  color: #249da7;
+  margin-bottom: 5px;
+  margin-top: 13px;
+  display: block;
+}
+
+.intervene-input, .intervene-textarea {
+  width: 97%;
+  border-radius: 7px;
+  padding: 8px 7px;
+  font-size: 1.06em;
+  border: 1.6px solid #b8e0e9;
+  background: #f9fcfd;
+  margin-bottom: 10px;
+  font-family: inherit;
+  transition: border-color 0.12s;
+}
+.intervene-input:focus, .intervene-textarea:focus {
+  outline: none;
+  border-color: #39e7d2;
+  background: #f6fcfa;
+}
+.intervene-actions {
+  margin-top: 18px;
+  text-align: center;
+}
+.intervene-actions button {
+  background: linear-gradient(90deg,#ffb85b 20%,#fa6872 100%);
+  color: #fff;
+  border: none;
+  border-radius: 9px;
+  padding: 7px 22px;
+  font-size: 1.07em;
+  font-weight: 700;
+  margin: 0 7px;
+  box-shadow: 0 1.5px 9px #faa57c3c;
+  cursor: pointer;
+  transition: background 0.14s;
+}
+.intervene-actions button:hover {
+  background: linear-gradient(90deg,#fa6872 15%,#ffb85b 100%);
+}
+
+/* --- Exclamation mark for red stoplight --- */
+.stoplight-exclaim {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 1.44em;
+  color: #f85438;
+  cursor: pointer;
+  vertical-align: middle;
+  font-weight: 900;
+  transition: color 0.18s, transform 0.13s;
+}
+.stoplight-exclaim:hover {
+  color: #ff8b3d;
+  transform: scale(1.13) rotate(-10deg);
+}
+
+/* --- Show a sticky note for active intervention --- */
+.stoplight-intervention-note {
+  display: inline-block;
+  background: #fffbe3;
+  color: #df9000;
+  border-radius: 7px;
+  padding: 2.5px 8px;
+  font-size: 0.94em;
+  margin-top: 6px;
+  margin-bottom: 2px;
+  box-shadow: 0 2px 8px #efd66445;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.info-btn {
+  background: linear-gradient(90deg,#5eebae 10%,#36a7ee 100%);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 10px 30px;
+  font-size: 1.13em;
+  font-weight: 700;
+  cursor: pointer;
+  margin: 0 auto 18px auto;
+  display: block;
+  box-shadow: 0 2px 12px #a7f0e840;
+  transition: background 0.13s, transform 0.1s;
+}
+.info-btn:active { background: #22c39c; transform: scale(0.98);}
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
 table {
   border-collapse: separate;
   border-spacing: 0 6px;
   width: 100%;
   background: none;
   margin-bottom: 13px;
-  font-size: 1.07em;
+  font-size: 1.06em;
   box-shadow: none;
   table-layout: fixed;
-  min-width: 580px;
+  min-width: 880px;
+  position: relative;
 }
-
 th, td {
   border: none;
   padding: 8px 4px;
   text-align: center;
-  background: rgba(255,255,255,0.84);
+  background: rgba(255,255,255,0.78);
   border-radius: 11px;
-  box-shadow: 0 2.5px 10px #bbd2ea18;
+  box-shadow: 0 2.5px 10px #bbd2ea20;
   font-weight: 500;
   vertical-align: middle;
   position: relative;
-  overflow: hidden;
-  word-break: break-word;
 }
-
 th {
   background: linear-gradient(90deg,#e5f7fd 50%,#e8fff5 100%);
   font-size: 1.04em;
   font-weight: 700;
   color: #269fc9;
   letter-spacing: 0.01em;
-  box-shadow: 0 1.5px 4px #b5dffc21;
-  cursor: pointer;
-  user-select: none;
-  transition: color 0.14s;
+  box-shadow: 0 1.5px 4px #b5dffc24;
+  z-index: 2;
 }
-th.goal-name:hover {
-  color: #218fc6;
-  text-decoration: underline;
+tr {
+  transition: background 0.19s;
 }
-tr { transition: background 0.15s; }
-tr:hover td { background: #f0f9ffb3 !important; }
-
-.goal-btn-group {
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  gap: 6px;
-  min-width: 110px;
+tr:hover td {
+  background: #f0f9ffb3 !important;
 }
-
 .goal-btn {
-  flex: 1 1 0;
-  min-width: 68px;
-  max-width: 98px;
-  height: auto;
   background: linear-gradient(90deg, #f5fafd 70%, #e4f6f6 100%);
   border: 2.2px solid #b5c2d1;
   color: #3791d1;
+  padding: 7px 15px;
   border-radius: 10px;
-  font-size: 1em;
+  font-size: 1.03em;
   font-weight: 500;
   cursor: pointer;
   outline: none;
-  transition: background 0.18s, border-color 0.18s, color 0.13s, box-shadow 0.17s, transform 0.12s;
-  box-shadow: 0 2px 10px #60d0fb17;
-  text-align: center;
-  white-space: normal;
-  line-height: 1.22em;
-  padding: 8px 4px 8px 4px;
-  overflow-wrap: break-word;
-  word-break: break-word;
+  transition: 
+    background 0.19s,
+    border-color 0.19s,
+    color 0.15s,
+    box-shadow 0.2s,
+    transform 0.16s;
+  box-shadow: 0 2px 10px #60d0fb1a;
+  min-width: 90px;
+  max-width: 100px;
 }
-.goal-btn:active { background: #dafce8; transform: scale(0.97);}
+.goal-btn:active { 
+  background: #dafce8;
+  transform: scale(0.93);
+}
 .goal-btn.completed {
   background: linear-gradient(90deg, #49dfa0 15%, #31b7fa 100%);
   color: #fff;
   border: 2.2px solid #30a987;
   font-weight: 700;
   box-shadow: 0 2px 16px #31b7fa34 inset;
-  transform: scale(1.05);
+  transform: scale(1.08);
   letter-spacing: 0.01em;
   filter: drop-shadow(0 1.8px 6px #36deac60);
 }
-
-.star-slot {
-  width: 1.55em; height: 1.55em;
-  display: flex;
-  align-items: center; justify-content: center;
-}
-
 .star {
   color: #ffd700;
-  font-size: 1.26em;
+  font-size: 1.38em;
+  margin-left: 7px;
   filter: drop-shadow(0 2px 4px #f7d73d6a);
   animation: shine 0.7s;
-  margin-left: 0.08em;
-  margin-right: 0.08em;
-  vertical-align: middle;
-  line-height: 1;
 }
 @keyframes shine {
   0% { transform: scale(0.7) rotate(-18deg);}
@@ -216,47 +290,9 @@ tr:hover td { background: #f0f9ffb3 !important; }
   90% { filter: drop-shadow(0 2px 15px #ffe670);}
   100% { transform: scale(1) rotate(0);}
 }
-
-.notes-row td {
-  background: #f7fbfc;
-  border-radius: 13px;
-  padding: 7px 6px 13px 6px;
-  text-align: left;
-  box-shadow: 0 1px 8px #b7e2f930;
-  font-size: 1em;
-  border-top: none;
-}
-.note-input {
-  width: 99%;
-  min-width: 60px;
-  min-height: 22px;
-  font-size: 1em;
-  font-family: inherit;
-  border: 1.5px solid #c2e2f6;
-  border-radius: 7px;
-  padding: 6px 7px;
-  box-sizing: border-box;
-  resize: vertical;
-  background: #fff;
-  margin-top: 2px;
-  transition: border-color 0.13s;
-}
-.note-input:focus {
-  outline: none;
-  border-color: #51d9e6;
-  background: #f0fbf9;
-}
-.note-label {
-  color: #48adc4;
-  font-size: 0.97em;
-  font-weight: 600;
-  margin-bottom: 3px;
-  display: block;
-  letter-spacing: 0.01em;
-}
 .perfect-day {
   color: #ffd700;
-  font-size: 1.32em;
+  font-size: 1.35em;
   font-weight: 800;
   display: inline-block;
   margin-left: 6px;
@@ -272,8 +308,8 @@ tr:hover td { background: #f0f9ffb3 !important; }
 }
 .small-note {
   color: #708497;
-  font-size: 0.97em;
-  margin-top: 13px;
+  font-size: 0.99em;
+  margin-top: 14px;
   text-align: center;
   opacity: 0.88;
   letter-spacing: 0.01em;
@@ -285,57 +321,78 @@ tr.today-row td {
   font-weight: 700;
   box-shadow: 0 1.5px 11px #68e7b81c;
 }
-
-/* --------- RESPONSIVE ----------- */
-@media (max-width: 900px) {
-  .container { max-width: 99vw; }
-  h1 { font-size: 1.4em;}
-  .goal-btn { min-width: 62px; max-width: 84px; font-size: 0.96em;}
-  th, td { font-size: 0.93em; padding: 5px 2px;}
+/* --- Stoplight Row Above Table --- */
+.stoplight-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 34px;
+  margin: 13px 0 17px 0;
+  flex-wrap: wrap;
 }
-
-@media (max-width: 700px) {
-  .container { padding: 4vw 0vw 3vw 0vw;}
-  .progress-bar-bg { height: 22px; }
-  table { font-size: 0.96em; min-width: 550px;}
-  th, td { font-size: 0.88em; padding: 3px 0.2vw;}
-  .goal-btn { min-width: 56px; max-width: 64px; font-size: 0.89em; padding: 7px 1px; }
-  .star-slot { width: 1.15em; height: 1.15em; }
+.stoplight-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 110px;
+  flex: 1 1 120px;
 }
-
-@media (max-width: 540px) {
-  .container { padding: 2vw 0vw 1vw 0vw;}
-  h1 { font-size: 1.1em; }
-  .progress-bar-bg { height: 15px; }
-  table { font-size: 0.84em; min-width: 440px;}
-  th, td { font-size: 0.79em; padding: 2px 1px;}
-  .goal-btn { min-width: 44px; max-width: 59px; font-size: 0.76em; padding: 6px 0.5px; }
-  .star-slot { width: 0.9em; height: 0.9em; }
+.stoplight-label {
+  font-size: 1em;
+  font-weight: 600;
+  color: #269fc9;
+  margin-bottom: 6px;
+  text-align: center;
 }
-
-/* Horizontal scroll for very small screens */
-@media (max-width: 650px) {
-  .container {
-    overflow-x: auto;
-  }
-  table {
-    display: block;
-    width: 100%;
-    overflow-x: auto;
-  }
-  thead, tbody, tr {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-  }
+.goal-stoplight {
+  display: inline-block;
+  width: 1.7em;
+  height: 1.7em;
+  border-radius: 50%;
+  background: #eee;
+  box-shadow: 0 1.5px 7px #a7f0e84a;
+  border: 2.5px solid #fff;
+  position: relative;
+  margin-bottom: 4px;
 }
-
-/* Modals more readable on small devices */
-@media (max-width: 600px) {
-  .modal-card { width: 97vw; padding: 7vw 2vw 8vw 2vw;}
+.stoplight-green { background: #3ece5a; border-color: #acebb4; }
+.stoplight-yellow { background: #f5d21f; border-color: #f7eab0; }
+.stoplight-red { background: #eb5454; border-color: #ffd2d2; }
+.stoplight-status-label {
+  font-size: 0.97em;
+  color: #888;
+  margin-top: 2px;
+  text-align: center;
 }
-
-/* Modal styles for wizard/goal info */
+.goal-title-link {
+  cursor: pointer;
+  text-decoration: underline dotted #3791d1 1.5px;
+  color: #2486b9;
+  font-weight: 700;
+  transition: color 0.12s;
+}
+.goal-title-link:hover { color: #20be7c; }
+.daily-note-row td {
+  background: #eafaff !important;
+  border: none !important;
+  padding: 7px 4px 11px 4px !important;
+  box-shadow: 0 1.5px 8px #67e4f114;
+}
+.daily-note {
+  width: 95%;
+  min-height: 24px;
+  border-radius: 8px;
+  border: 1.2px solid #aee7f8;
+  background: #fff;
+  font-size: 1em;
+  padding: 6px 7px;
+  margin: 2px auto;
+  box-shadow: 0 1.5px 7px #c7eaff14;
+  font-family: inherit;
+  resize: vertical;
+}
+.daily-note:focus { outline: none; border-color: #25d4af; background: #f4fef8;}
+/* --- Modal, Wizard, and Chart (no change) --- */
 .modal-bg {
   display: none;
   position: fixed;
@@ -358,19 +415,7 @@ tr.today-row td {
   position: relative;
   animation: pop .32s cubic-bezier(.22,1.01,.69,.95);
 }
-.modal-card h2 {
-  margin: 0 0 18px 0;
-  font-size: 1.22em;
-  color: #2ca7e4;
-  font-weight: 800;
-  letter-spacing: 0.01em;
-}
-.modal-card p {
-  color: #33547a;
-  font-size: 1.06em;
-  line-height: 1.5em;
-  margin: 0 0 8px 0;
-}
+#perfect-days-modal-card { max-width: 710px; width: 99vw;}
 .close-modal {
   position: absolute;
   right: 22px;
@@ -427,12 +472,100 @@ tr.today-row td {
   text-align: left;
 }
 .wizard-summary b { color: #249da7; }
+/* --- Sticky table head --- */
+thead th {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+/* --- Perfect Day Grid Squares --- */
+.perfect-day-table {
+  border-collapse: separate;
+  border-spacing: 2px 6px;
+  margin: 0 auto 10px auto;
+  width: auto;
+}
+.perfect-day-table th, .perfect-day-table td {
+  text-align: center;
+  padding: 5px 4px;
+  background: none;
+  border: none;
+}
+.perfect-square {
+  display: inline-block;
+  width: 24px; height: 24px;
+  border-radius: 7px;
+  background: #e6e6e6;
+  opacity: 0.34;
+  transition: background 0.2s, opacity 0.15s;
+  cursor: pointer;
+  border: 1.1px solid #b6e1e8;
+  position: relative;
+  margin: 0 1.5px;
+}
+.perfect-square.filled {
+  background: linear-gradient(90deg, #41e1a8 30%, #319cfa 96%);
+  opacity: 1;
+  border: 1.3px solid #36b7fa;
+  box-shadow: 0 2px 10px #3ae9f421;
+}
+.perfect-square:hover:after {
+  content: attr(data-date);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #319cfa;
+  color: #fff;
+  padding: 2px 7px;
+  font-size: 0.89em;
+  border-radius: 7px;
+  white-space: nowrap;
+  z-index: 22;
+  opacity: 1;
+  pointer-events: none;
+}
+.perfect-day-table th {
+  font-weight: bold;
+  color: #269fc9;
+  font-size: 1.06em;
+  letter-spacing: 0.01em;
+}
+/* Responsive tweaks */
+@media (max-width: 1150px) {
+  .container { max-width: 99vw; }
+  .progress-bar-bg { width: 98%; }
+  table { min-width: 700px; font-size: 0.98em;}
+}
+@media (max-width: 850px) {
+  th, td { font-size: 0.94em; padding: 5px 1.5px;}
+  .goal-btn { font-size: 0.94em; padding: 6px 8px;}
+  table { min-width: 570px; }
+}
+@media (max-width: 700px) {
+  .container { padding: 8px 0.5vw;}
+  h1 { font-size: 1.25em;}
+  .progress-bar-bg { height: 22px; }
+  table { font-size: 0.90em; min-width: 430px;}
+  .stoplight-row { gap: 10px; }
+}
+@media (max-width: 520px) {
+  .container { padding: 1px 0vw;}
+  h1 { font-size: 1em; }
+  .progress-bar-bg { height: 17px; }
+  table { font-size: 0.84em; min-width: 350px;}
+  .goal-btn { min-width: 40px; max-width: 64px; font-size: 0.80em; padding: 5px 2px; }
+}
 
 </style>
+<body>
   <div class="container">
-    <div class="settings-bar">
-      <button class="settings-btn" id="open-wizard-btn">New Challenge / Edit Goals</button>
-    </div>
+<div class="settings-bar" style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; padding-right: 16px;">
+  <button class="settings-btn" id="open-wizard-btn">New Challenge / Edit Goals</button>
+  <button class="settings-btn" id="review-interventions-btn">Review Interventions</button>
+</div>
+
+    
     <h1 id="challenge-title">90-Day 5-Goal Daily Tracker</h1>
     <div class="progress-section">
       <div class="progress-bar-bg">
@@ -441,33 +574,41 @@ tr.today-row td {
       <span class="percentage" id="percent"></span>
       <div class="small-note" id="challenge-dates"></div>
     </div>
-    <table id="tracker-table">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th class="goal-name" data-goalid="0"></th>
-          <th class="goal-name" data-goalid="1"></th>
-          <th class="goal-name" data-goalid="2"></th>
-          <th class="goal-name" data-goalid="3"></th>
-          <th class="goal-name" data-goalid="4"></th>
-          <th>Perfect Day?</th>
-        </tr>
-      </thead>
-      <tbody id="tracker-body"></tbody>
-    </table>
+    <button class="info-btn" id="show-perfect-days-btn">Show Perfect Day Grid</button>
+    <div id="stoplight-row" class="stoplight-row"></div>
+    <div class="modal-bg" id="intervene-modal-bg">
+  <div class="modal-card" id="intervene-modal-card">
+    <button class="close-modal" id="close-intervene-modal">&times;</button>
+    <div id="intervene-content"></div>
+  </div>
+</div>
+    <div class="table-wrap">
+      <table id="tracker-table">
+        <thead>
+          <tr id="tracker-header-row">
+            <th>Date</th>
+            <th><span class="goal-title-link" data-goal-id="0">WALK/JOG</span></th>
+            <th><span class="goal-title-link" data-goal-id="1">MEDICATION</span></th>
+            <th><span class="goal-title-link" data-goal-id="2">STRENGTH TRAINING</span></th>
+            <th><span class="goal-title-link" data-goal-id="3">HOUSE CLEANING</span></th>
+            <th><span class="goal-title-link" data-goal-id="4">WEBSITE PROJECTS</span></th>
+            <th>Perfect Day?</th>
+          </tr>
+        </thead>
+        <tbody id="tracker-body"></tbody>
+      </table>
+    </div>
     <div class="small-note">
-      ⭐ Click each button to complete a goal.<br>
-      Click a <u>goal name</u> for details.<br>
-      Progress and notes are saved in your browser.<br>
+      ⭐ Click each button to complete a goal. Progress is saved in your browser.<br>
       <b>Tip:</b> Bookmark this page for quick access every day!
     </div>
   </div>
 
-  <!-- Success and Perfect Sounds -->
+  <!-- Sounds -->
   <audio id="success-sound" src="success.mp3" preload="auto"></audio>
   <audio id="perfect-sound" src="perfect.mp3" preload="auto"></audio>
 
-  <!-- Goal Modal -->
+  <!-- Goal Info Modal -->
   <div class="modal-bg" id="goal-modal-bg">
     <div class="modal-card" id="goal-modal-card">
       <button class="close-modal" id="close-goal-modal">&times;</button>
@@ -475,7 +616,17 @@ tr.today-row td {
       <p id="goal-modal-desc"></p>
     </div>
   </div>
-  
+
+  <!-- Perfect Day Grid Modal -->
+  <div class="modal-bg" id="perfect-days-modal-bg">
+    <div class="modal-card" id="perfect-days-modal-card" style="max-width:710px">
+      <button class="close-modal" id="close-perfect-days-modal">&times;</button>
+      <h2 style="margin-bottom:12px;">Perfect Day Tracker (by Weekday)</h2>
+      <div id="perfect-days-grid" style="overflow-x:auto;min-width:310px;"></div>
+      <div class="small-note">Colored squares = all goals completed on that weekday</div>
+    </div>
+  </div>
+
   <!-- Step-by-step Wizard Modal -->
   <div class="modal-bg" id="wizard-modal-bg">
     <div class="modal-card" id="wizard-modal-card">
@@ -484,10 +635,19 @@ tr.today-row td {
     </div>
   </div>
 
-  <!-- JS will be added in the next step -->
-<script>
-  // ========================
-// 90-Day 5-Goal Tracker
+  <!-- Interventions Review Modal -->
+<div class="modal-bg" id="intervention-review-modal-bg">
+  <div class="modal-card" id="intervention-review-modal-card">
+    <button class="close-modal" id="close-intervention-review-modal">&times;</button>
+    <h2 style="margin-bottom: 12px;">Active Interventions</h2>
+    <div id="intervention-review-content" style="text-align:left;"></div>
+  </div>
+</div>
+
+
+  <script>
+// ========================
+// 90-Day 5-Goal Tracker - Desktop Table UI
 // ========================
 
 // --------- CONFIGURATION AND STORAGE ----------
@@ -509,7 +669,7 @@ const DEFAULTS = {
     "Work for 1 hour on video editing, voice acting, or programming. Progress adds up!"
   ]
 };
-const STORAGE_KEY = "my_90day_goal_tracker_custom_v2";
+const STORAGE_KEY = "my_90day_goal_tracker_desktop_v1";
 
 function getSavedData() {
   try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch { return {}; }
@@ -522,7 +682,7 @@ function getChallengeConfig() {
   if (!data.challenge) {
     return {...DEFAULTS, days: 90};
   }
-  return {...data.challenge, days: 90}; // always 90
+  return {...data.challenge, days: 90};
 }
 function saveChallengeConfig(config) {
   let data = getSavedData();
@@ -530,7 +690,6 @@ function saveChallengeConfig(config) {
   saveData(data);
 }
 
-// --------- RENDER TABLE AND GOALS ----------
 function genDates(startDate, days) {
   let arr = [];
   let d = new Date(startDate + "T00:00:00");
@@ -542,6 +701,26 @@ function genDates(startDate, days) {
   return arr;
 }
 
+// --------- INTERVENTIONS STORAGE ----------
+function getInterventions() {
+  let data = getSavedData();
+  return data.interventions || {};
+}
+function saveIntervention(goalIndex, intervention) {
+  let data = getSavedData();
+  data.interventions = data.interventions || {};
+  data.interventions[goalIndex] = intervention;
+  saveData(data);
+}
+function clearIntervention(goalIndex) {
+  let data = getSavedData();
+  if (data.interventions && data.interventions[goalIndex]) {
+    delete data.interventions[goalIndex];
+    saveData(data);
+  }
+}
+
+// --------- RENDER TABLE ----------
 function renderTable() {
   const config = getChallengeConfig();
   const {goals, goalDescs, startDate, days} = config;
@@ -554,27 +733,21 @@ function renderTable() {
   let allDates = genDates(startDate, days);
   let total = 0, completed = 0;
   let todayStr = (new Date()).toLocaleDateString('en-US', {month:'2-digit',day:'2-digit',year:'numeric'});
-
   allDates.forEach((dateObj, row) => {
     let dateStr = dateObj.toLocaleDateString('en-US', {month:'2-digit',day:'2-digit',year:'numeric'});
     let dayName = dateObj.toLocaleDateString('en-US', {weekday:'short'});
-    // --- Main goals row ---
     let tr = document.createElement('tr');
     if (dateStr === todayStr) tr.classList.add('today-row');
-    // Date + day name
     let tdDate = document.createElement('td');
-    tdDate.innerHTML = `<b>${dayName}</b> ${dateStr}`;
+    tdDate.innerHTML = `<b>${dayName}</b> <br>${dateStr}`;
     tr.appendChild(tdDate);
+
     let perfect = true;
-    let doneArr = [];
     for(let col=0; col<goals.length; col++) {
       total++;
       let cellId = `${row}_${col}`;
       let done = data.progress[cellId] === true;
-      doneArr.push(done);
       let td = document.createElement('td');
-      let group = document.createElement('div');
-      group.className = "goal-btn-group";
       let btn = document.createElement('button');
       btn.className = 'goal-btn' + (done ? ' completed' : '');
       btn.textContent = done ? 'Done' : 'Mark Done';
@@ -583,18 +756,15 @@ function renderTable() {
         data.progress[cellId] = nowDone;
         saveData(data);
         if (nowDone) playSound();
-
-        // --- PERFECT SOUND LOGIC ---
-        // Only play when marking the LAST goal complete
-        let goalsThisDay = [];
-        for (let cc = 0; cc < goals.length; cc++) {
+        // Check for perfect day sound
+        let allDone = true;
+        for (let cc=0; cc<goals.length; cc++) {
           if (cc === col) {
-            goalsThisDay.push(nowDone);
+            if (!nowDone) allDone = false;
           } else {
-            goalsThisDay.push(data.progress[`${row}_${cc}`] === true);
+            if (!(data.progress[`${row}_${cc}`] === true)) allDone = false;
           }
         }
-        let allDone = goalsThisDay.every(Boolean);
         if (allDone && !data.perfectPlayed[row]) {
           playPerfectSound();
           data.perfectPlayed[row] = true;
@@ -605,17 +775,20 @@ function renderTable() {
           saveData(data);
         }
         renderTable();
+        renderStoplights();
       };
-      group.appendChild(btn);
-      let starSlot = document.createElement('span');
-      starSlot.className = 'star-slot';
-      if (done) { starSlot.appendChild(makeStar()); completed++; }
-      group.appendChild(starSlot);
-      td.appendChild(group);
-      if (!done) perfect = false;
+      td.appendChild(btn);
+      if (done) {
+        let star = document.createElement('span');
+        star.className = 'star';
+        star.textContent = '⭐';
+        td.appendChild(star);
+        completed++;
+      } else {
+        perfect = false;
+      }
       tr.appendChild(td);
     }
-    // Perfect day
     let tdPerfect = document.createElement('td');
     if (perfect) {
       tdPerfect.innerHTML = `<span class="perfect-day">🌟</span> <span style="color:#389e6c;font-size:1.03em;font-weight:700;">Perfect!</span>`;
@@ -623,35 +796,33 @@ function renderTable() {
     tr.appendChild(tdPerfect);
     tbody.appendChild(tr);
 
-    // --- Notes row (always after the day's row) ---
-    let trNote = document.createElement('tr');
-    trNote.className = "notes-row";
-    let tdNote = document.createElement('td');
-    tdNote.colSpan = 7;
-    tdNote.innerHTML = `
-      <span class="note-label">Note for <b>${dayName} ${dateStr}</b>:</span>
-      <textarea class="note-input" rows="2" placeholder="Add note..."></textarea>
+    // Add note row under each day
+    let noteTr = document.createElement('tr');
+    noteTr.className = "daily-note-row";
+    let noteTd = document.createElement('td');
+    noteTd.colSpan = 7;
+    let noteKey = `note_${row}`;
+    noteTd.innerHTML = `
+      <textarea class="daily-note" id="note-${row}" placeholder="Add a note for this day...">${data.notes[noteKey]||""}</textarea>
     `;
-    let noteInput = tdNote.querySelector('textarea');
-    noteInput.value = data.notes[row] || "";
-    noteInput.onchange = function() {
-      data.notes[row] = noteInput.value;
-      saveData(data);
-    };
-    trNote.appendChild(tdNote);
-    tbody.appendChild(trNote);
+    noteTr.appendChild(noteTd);
+    tbody.appendChild(noteTr);
+
+    // Save on blur (or change) of the note
+    setTimeout(() => {
+      let noteBox = document.getElementById(`note-${row}`);
+      if (noteBox) {
+        noteBox.onchange = function() {
+          data.notes[noteKey] = this.value;
+          saveData(data);
+        }
+      }
+    }, 5);
   });
 
-  // Update progress
   let percent = Math.round((completed/total)*1000)/10;
   document.getElementById('percent').textContent = `${completed} / ${total} (${percent}%) completed`;
   document.getElementById('progress-bar').style.width = `${percent}%`;
-
-  // Show goal names and dates
-  document.querySelectorAll('.goal-name').forEach((th, i) => {
-    th.textContent = goals[i];
-    th.setAttribute('title', goalDescs[i]);
-  });
 
   // Challenge info at top
   document.getElementById('challenge-title').textContent = config.challengeTitle || DEFAULTS.challengeTitle;
@@ -661,27 +832,156 @@ function renderTable() {
   document.getElementById('challenge-dates').textContent = `From ${prettyStart} to ${prettyEnd} (${days} days) • Goal: 80%+ completion`;
 }
 
-function makeStar() {
-  let span = document.createElement('span');
-  span.className = 'star';
-  span.textContent = '⭐';
-  return span;
+// --------- STOPLIGHT BY REGULARITY (STREAK) with Intervention! ----------
+function getGoalRegularityStatus(goalIndex) {
+  const config = getChallengeConfig();
+  const { startDate, days } = config;
+  let data = getSavedData();
+  data.progress = data.progress || {};
+  let allDates = genDates(startDate, days);
+
+  // Go from today backward, count how many consecutive days were "missed"
+  let today = new Date();
+  let missStreak = 0;
+  for (let i = allDates.length - 1; i >= 0; i--) {
+    let dateObj = allDates[i];
+    if (dateObj > today) continue; // Skip future days
+    let cellId = `${i}_${goalIndex}`;
+    let completed = data.progress[cellId] === true;
+    if (completed) break; // Streak broken (was completed)
+    else missStreak++;
+  }
+  // Status logic:
+  if (missStreak === 0) return "green";
+  if (missStreak === 1) return "yellow";
+  return "red";
 }
 
+function renderStoplights() {
+  const config = getChallengeConfig();
+  const {goals} = config;
+  const stoplightRow = document.getElementById('stoplight-row');
+  const interventions = getInterventions();
+  stoplightRow.innerHTML = '';
+  for (let col = 0; col < goals.length; col++) {
+    let status = getGoalRegularityStatus(col);
+    let stoplightClass = 'stoplight-red';
+    let statusLabel = 'Needs Attention!';
+    if (status === "green") { stoplightClass = 'stoplight-green'; statusLabel = "Consistent!"; }
+    else if (status === "yellow") { stoplightClass = 'stoplight-yellow'; statusLabel = "Just Missed"; }
+    // Block for each goal
+    let block = document.createElement('div');
+    block.className = 'stoplight-block';
+    let label = document.createElement('div');
+    label.className = 'stoplight-label';
+    label.innerHTML = `<span>${goals[col]}</span>`;
+    let light = document.createElement('span');
+    light.className = 'goal-stoplight ' + stoplightClass;
+    light.title = statusLabel;
+    block.appendChild(label);
+    block.appendChild(light);
+    // Show exclamation if red, click to intervene
+    if (status === "red") {
+      let ex = document.createElement('span');
+      ex.className = 'stoplight-exclaim';
+      ex.textContent = '!';
+      ex.title = "Trouble with this goal? Click for help.";
+      ex.onclick = () => openInterveneWizard(col);
+      block.appendChild(ex);
+
+      // Show sticky note for active intervention
+      if (interventions[col]) {
+        let note = document.createElement('div');
+        note.className = 'stoplight-intervention-note';
+        note.innerHTML = `<span>📝 ${interventions[col].reminder || "You planned an intervention"}</span>`;
+        block.appendChild(note);
+      }
+    }
+    let statusText = document.createElement('div');
+    statusText.className = 'stoplight-status-label';
+    statusText.textContent = statusLabel;
+    block.appendChild(statusText);
+    stoplightRow.appendChild(block);
+  }
+  // Optional: Auto-clear interventions if goal no longer red
+  for (let col = 0; col < goals.length; col++) {
+    let status = getGoalRegularityStatus(col);
+    let interventions = getInterventions();
+    if ((status === "green" || status === "yellow") && interventions[col]) {
+      clearIntervention(col);
+    }
+  }
+}
+
+// --------- PERFECT DAY GRID MODAL ----------
+function renderPerfectDaysGrid() {
+  const config = getChallengeConfig();
+  const {startDate, days} = config;
+  let data = getSavedData();
+  data.perfectPlayed = data.perfectPlayed || {};
+  let allDates = genDates(startDate, days);
+
+  // Build map: { "Mon": [rowIndex, ...], ... }
+  let weekdays = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  let weekdayMap = {};
+  weekdays.forEach(wd => weekdayMap[wd]=[]);
+  allDates.forEach((dateObj, row) => {
+    let dayName = dateObj.toLocaleDateString('en-US', {weekday:'short'});
+    // Normalize to 'Mon' format
+    dayName = dayName.slice(0,3);
+    // Safari/iOS uses different capitalization!
+    let wdIdx = weekdays.findIndex(w => w.toLowerCase() === dayName.toLowerCase());
+    if (wdIdx > -1) weekdayMap[weekdays[wdIdx]].push({row, date: dateObj});
+  });
+
+  // Find the max length (some weekdays will have 13, some 12)
+  let maxLen = Math.max(...Object.values(weekdayMap).map(arr=>arr.length));
+
+  // Build HTML table
+  let html = `<table class="perfect-day-table"><thead><tr><th>Weekday</th>`;
+  for(let i=1;i<=maxLen;i++) html+=`<th>#${i}</th>`;
+  html+=`</tr></thead><tbody>`;
+  weekdays.forEach(wd => {
+    html += `<tr><th>${wd}</th>`;
+    let arr = weekdayMap[wd];
+    for(let i=0;i<maxLen;i++) {
+      if (arr[i]) {
+        let {row, date} = arr[i];
+        let dateStr = date.toLocaleDateString('en-US', {month:'2-digit',day:'2-digit',year:'numeric'});
+        let filled = data.perfectPlayed[row] ? "filled" : "";
+        html += `<td>
+          <span class="perfect-square ${filled}" data-date="${dateStr}" title="${dateStr}"></span>
+        </td>`;
+      } else {
+        html += `<td></td>`;
+      }
+    }
+    html += `</tr>`;
+  });
+  html += `</tbody></table>`;
+  document.getElementById('perfect-days-grid').innerHTML = html;
+}
+
+// Modal open/close logic for perfect day grid
+document.getElementById('show-perfect-days-btn').onclick = function() {
+  document.getElementById('perfect-days-modal-bg').classList.add('active');
+  setTimeout(renderPerfectDaysGrid, 5);
+};
+document.getElementById('close-perfect-days-modal').onclick = function() {
+  document.getElementById('perfect-days-modal-bg').classList.remove('active');
+};
+document.getElementById('perfect-days-modal-bg').onclick = function(e) {
+  if (e.target === this) document.getElementById('perfect-days-modal-bg').classList.remove('active');
+};
+
+// --- SOUND ---
 function playSound() {
   let audio = document.getElementById('success-sound');
-  if (audio) {
-    audio.currentTime = 0;
-    audio.play();
-  }
+  if (audio) { audio.currentTime = 0; audio.play(); }
 }
-
 function playPerfectSound() {
   let audio = document.getElementById('perfect-sound');
-  if (audio) {
-    audio.currentTime = 0;
-    audio.play();
-  }
+  if (audio) { audio.currentTime = 0; audio.play(); }
 }
 
 // ---------- GOAL MODAL ----------
@@ -694,6 +994,141 @@ function openGoalModal(goalId) {
 function closeGoalModal() {
   document.getElementById('goal-modal-bg').classList.remove('active');
 }
+
+// ---------- INTERVENTION WIZARD ----------
+let interveneGoalIndex = null;
+let interveneStep = 0;
+let interveneData = {};
+
+function openInterveneWizard(goalIndex) {
+  interveneGoalIndex = goalIndex;
+  interveneStep = 0;
+  interveneData = { obstacle:"", change:"", action:"", reminder:"" };
+  renderInterveneStep();
+  document.getElementById('intervene-modal-bg').classList.add('active');
+}
+function closeInterveneWizard() {
+  document.getElementById('intervene-modal-bg').classList.remove('active');
+}
+function renderInterveneStep() {
+  const config = getChallengeConfig();
+  const goalName = config.goals[interveneGoalIndex] || "";
+  let content = document.getElementById('intervene-content');
+  let step = interveneStep;
+  let html = '';
+  // Step indicator
+  html += `<div class="wizard-progress">Step ${step+1} of 4</div>`;
+  if (step === 0) {
+    html += `
+      <div class="intervene-step-label">What is the main obstacle to completing <b>${goalName}</b>?</div>
+      <input class="intervene-input" id="intervene-obstacle" type="text" placeholder="E.g. too tired, forgetful, etc." value="${interveneData.obstacle||""}">
+      <div class="intervene-actions">
+        <button id="interveneNext">Next</button>
+      </div>
+    `;
+    content.innerHTML = html;
+    document.getElementById('interveneNext').onclick = () => {
+      interveneData.obstacle = document.getElementById('intervene-obstacle').value.trim();
+      interveneStep++;
+      renderInterveneStep();
+    };
+  } else if (step === 1) {
+    html += `
+      <div class="intervene-step-label">What could you change to help you achieve this goal?</div>
+      <input class="intervene-input" id="intervene-change" type="text" placeholder="E.g. set a reminder, ask for support..." value="${interveneData.change||""}">
+      <div class="intervene-actions">
+        <button id="intervenePrev">Back</button>
+        <button id="interveneNext">Next</button>
+      </div>
+    `;
+    content.innerHTML = html;
+    document.getElementById('intervenePrev').onclick = () => { interveneStep--; renderInterveneStep(); };
+    document.getElementById('interveneNext').onclick = () => {
+      interveneData.change = document.getElementById('intervene-change').value.trim();
+      interveneStep++;
+      renderInterveneStep();
+    };
+  } else if (step === 2) {
+    html += `
+      <div class="intervene-step-label">What is one specific action you will try next?</div>
+      <textarea class="intervene-textarea" id="intervene-action" placeholder="Describe your action...">${interveneData.action||""}</textarea>
+      <div class="intervene-actions">
+        <button id="intervenePrev">Back</button>
+        <button id="interveneNext">Next</button>
+      </div>
+    `;
+    content.innerHTML = html;
+    document.getElementById('intervenePrev').onclick = () => { interveneStep--; renderInterveneStep(); };
+    document.getElementById('interveneNext').onclick = () => {
+      interveneData.action = document.getElementById('intervene-action').value.trim();
+      interveneStep++;
+      renderInterveneStep();
+    };
+  } else if (step === 3) {
+    html += `
+      <div class="intervene-step-label">Encouragement or reminder to your future self (optional):</div>
+      <textarea class="intervene-textarea" id="intervene-reminder" placeholder="Write a reminder or encouragement...">${interveneData.reminder||""}</textarea>
+      <div class="intervene-actions">
+        <button id="intervenePrev">Back</button>
+        <button id="interveneFinish">Finish & Save</button>
+      </div>
+    `;
+    content.innerHTML = html;
+    document.getElementById('intervenePrev').onclick = () => { interveneStep--; renderInterveneStep(); };
+    document.getElementById('interveneFinish').onclick = () => {
+      interveneData.reminder = document.getElementById('intervene-reminder').value.trim();
+      saveIntervention(interveneGoalIndex, interveneData);
+      closeInterveneWizard();
+      renderStoplights();
+    };
+  }
+}
+
+// Dismiss modal logic
+document.getElementById('close-intervene-modal').onclick = closeInterveneWizard;
+document.getElementById('intervene-modal-bg').onclick = function(e) {
+  if (e.target === this) closeInterveneWizard();
+};
+window.addEventListener('keydown', function(e) {
+  if (e.key === "Escape") closeInterveneWizard();
+});
+
+document.getElementById('review-interventions-btn').onclick = function () {
+  const interventions = getInterventions();
+  const config = getChallengeConfig();
+  const container = document.getElementById('intervention-review-content');
+  container.innerHTML = '';
+
+  let count = 0;
+  for (let goalId in interventions) {
+    const intv = interventions[goalId];
+    const goalTitle = config.goals[goalId] || `Goal ${parseInt(goalId)+1}`;
+    count++;
+    container.innerHTML += `
+      <div style="margin-bottom: 16px; padding: 12px; background:#f9fdfc; border-left: 4px solid #38cfa7; border-radius: 8px; box-shadow: 0 2px 8px #aaf8e330;">
+        <div style="font-weight: 700; color: #2b9fb6; margin-bottom: 6px;">${goalTitle}</div>
+        <div><b>Obstacle:</b> ${intv.obstacle || '—'}</div>
+        <div><b>Change:</b> ${intv.change || '—'}</div>
+        <div><b>Action:</b> ${intv.action || '—'}</div>
+        <div><b>Reminder:</b> ${intv.reminder || '—'}</div>
+      </div>
+    `;
+  }
+
+  if (count === 0) {
+    container.innerHTML = `<p style="color:#888;">No active interventions at this time.</p>`;
+  }
+
+  document.getElementById('intervention-review-modal-bg').classList.add('active');
+};
+
+document.getElementById('close-intervention-review-modal').onclick = function () {
+  document.getElementById('intervention-review-modal-bg').classList.remove('active');
+};
+document.getElementById('intervention-review-modal-bg').onclick = function(e) {
+  if (e.target === this) document.getElementById('intervention-review-modal-bg').classList.remove('active');
+};
+
 
 // ---------- STEP-BY-STEP WIZARD ----------
 function openWizard() {
@@ -712,7 +1147,7 @@ function closeWizard() {
 }
 let wizardStep = 0;
 let wizardData = {};
-const wizardTotalSteps = 12; // 0: name, 1: date, 2: g1, 3: d1, ..., 10:g5, 11:d5, 12:review
+const wizardTotalSteps = 12;
 
 function renderWizardStep() {
   const c = wizardData;
@@ -727,10 +1162,8 @@ function renderWizardStep() {
     return `<label style="text-align:left;display:block;font-weight:600;margin-bottom:4px;margin-top:4px;">${label}</label>
     <textarea class="wizard-textarea" id="${id}" placeholder="${placeholder||''}" ${required?'required':''} autofocus>${val||''}</textarea>`;
   }
-  // Wizard progress
   let progressText = '';
   if(step<=11) progressText = `<div class="wizard-progress">Step ${step+1} of 12</div>`;
-  // Steps
   if (step === 0) {
     content.innerHTML = `
       ${progressText}
@@ -764,11 +1197,9 @@ function renderWizardStep() {
       wizardStep++; renderWizardStep();
     };
   } else if (step >=2 && step<=11) {
-    // Steps 2,3 (goal1 name, desc), 4,5 (goal2 name, desc), ...
     let goalIdx = Math.floor((step-2)/2);
     let isDesc = ((step-2)%2===1);
     if (!isDesc) {
-      // Name step
       content.innerHTML = `
         ${progressText}
         <div class="wizard-step">
@@ -786,7 +1217,6 @@ function renderWizardStep() {
         wizardStep++; renderWizardStep();
       };
     } else {
-      // Desc step
       content.innerHTML = `
         ${progressText}
         <div class="wizard-step">
@@ -805,7 +1235,6 @@ function renderWizardStep() {
       };
     }
   } else if (step === 12) {
-    // Review step
     let goalsReview = '';
     for(let i=0;i<5;i++) {
       goalsReview += `<div class="wizard-summary">
@@ -828,7 +1257,6 @@ function renderWizardStep() {
     `;
     document.getElementById('wizPrev').onclick = () => { wizardStep--; renderWizardStep(); }
     document.getElementById('wizStart').onclick = () => {
-      // Save challenge, clear progress/notes, close wizard
       let config = {
         challengeTitle: c.challengeTitle || DEFAULTS.challengeTitle,
         startDate: c.startDate || DEFAULTS.startDate,
@@ -841,9 +1269,11 @@ function renderWizardStep() {
       data.progress = {};
       data.notes = {};
       data.perfectPlayed = {};
+      data.interventions = {};
       saveData(data);
       closeWizard();
       renderTable();
+      renderStoplights();
     };
   }
 }
@@ -851,34 +1281,39 @@ function renderWizardStep() {
 // ---- DOM EVENT HOOKS ----
 document.addEventListener('DOMContentLoaded', function() {
   renderTable();
-  // Goal name modal open
-  document.querySelectorAll('.goal-name').forEach(th => {
-    th.addEventListener('click', function(e) {
-      let gid = Number(this.getAttribute('data-goalid'));
-      openGoalModal(gid);
-    });
-  });
+  renderStoplights();
+
   document.getElementById('close-goal-modal').onclick = closeGoalModal;
   document.getElementById('goal-modal-bg').onclick = function(e) {
     if (e.target === this) closeGoalModal();
   };
-  // Wizard open/close
   document.getElementById('open-wizard-btn').onclick = openWizard;
   document.getElementById('close-wizard-modal').onclick = closeWizard;
   document.getElementById('wizard-modal-bg').onclick = function(e) {
     if (e.target === this) closeWizard();
   };
-  // ESC closes modals
   window.addEventListener('keydown', function(e) {
     if (e.key === "Escape") {
       closeGoalModal();
       closeWizard();
+      document.getElementById('perfect-days-modal-bg').classList.remove('active');
+      closeInterveneWizard();
     }
   });
-  // If there is no challenge, launch wizard
+
+  // Make header goal names clickable for details modal
+  Array.from(document.getElementsByClassName('goal-title-link')).forEach(span => {
+    span.onclick = function(e) {
+      let goalId = parseInt(this.getAttribute('data-goal-id'));
+      openGoalModal(goalId);
+    };
+  });
+
+  // Wizard opens on first run if no challenge
   const data = getSavedData();
   if (!data.challenge) openWizard();
 });
-</script>
+
+  </script>
 </body>
 </html>
